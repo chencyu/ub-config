@@ -6,7 +6,8 @@ BASHROOT=$(realpath "$(dirname "$BASH_SOURCE")")
 # 漂亮的Prompt
 # 要用單引號 '' 才能使用 \$
 # \e[色碼對m 顏色文字 \e[m
-export PS1='\e[0;31m(\D{%Y.%m.%d})(\@)\e[m\e[0;34m[BASH]\e[m\n\e[0;32m\u@\h\e[m:[\e[0;34m\w\e[m] \$\n>> '
+export PS1='\n\e[0;31m(\D{%Y.%m.%d})(\@)\e[m\e[0;34m[BASH]\e[m\n\e[0;32m\u@\h\e[m:[\e[0;34m\w\e[m] \$\n>> '
+export PS2='>> ' # 多行提示符號
 
 # 讓py/python都直接使用python3，比較方便
 # 讓pip直接使用pip3，比較方便
