@@ -43,7 +43,7 @@ function venv()
     case "$1" in
 
         "act"|"activate")
-            source "$HOME/.pyvenvs/$2/bin/activate" 2> /dev/null || \
+            source "$PYVENVS/$2/bin/activate" 2> /dev/null || \
             errmsg wrongitem envname "$2"
         ;;
 
