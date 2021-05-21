@@ -11,9 +11,9 @@ export PS2='>> ' # 多行提示符號
 
 # 讓py/python都直接使用python3，比較方便
 # 讓pip直接使用pip3，比較方便
-alias py=python3
-alias python=python3
-alias pip=pip3
+# alias py=python3
+# alias python=python3
+# alias pip=pip3
 
 # 真正實現clear效果
 alias cls='printf "\033c"'
@@ -21,7 +21,7 @@ alias cls='printf "\033c"'
 
 # 切換超級使用者權限時的偏好
 alias sudo='sudo '             # 空格的用途是告訴bash去檢查sudo後面接著的命令是否也是別名(alias)
-alias su='sudo -Es'
+alias su='sudo -Es export "PATH=$PATH"'
 
 
 # 載入其他設定檔

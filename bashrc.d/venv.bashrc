@@ -34,6 +34,30 @@ function errmsg()
     esac
 }
 
+
+function install_venv()
+{
+    if [[ ! $(lsb_release -i) =~ .*"Ubuntu".* ]]; then
+        echo "failed !"
+        return 1
+    fi
+    
+    while true;
+    do
+        read -p "Do you want to install it now? [yes/no]: " yn
+        case $yn in
+            "Y"|"y"|"Yes"|"yes")
+                sudo apt install python3-venv -y
+                return 0
+            ;;
+            "N"|"n"|"No"|"no")
+                return 1
+            ;;
+        esac
+    done
+}
+
+
 function venv()
 {
     local PYVER=3
@@ -59,7 +83,7 @@ function venv()
             if  [[ "$EnvName" =~ ^(\*|"")$ ]]; then
                 errmsg
             fi
-            python$PYVER -m venv --copies "$PYVENVS/$EnvName"
+            python$PYVER -m venv --copies "$PYVENVS/$EnvName" || install_venv
         ;;
 
         "ls"|"list")

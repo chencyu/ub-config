@@ -9,7 +9,10 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt update
+sudo apt install vim -y
+sudo apt install git -y
+sudo apt install gcc -y
+sudo apt install g++ -y
 
 
 # For Bash Profile
@@ -29,6 +32,8 @@ if [ ! -d "$HOME/.vim_runtime" ]; then
     sed -i '1s/^/set nu\nset mouse=a\n\n/' "$HOME/.vimrc"
 
 fi
+VIM=$(sudo update-alternatives --list editor | grep vim.basic)
+sudo update-alternatives --set editor $VIM
 
 
 # For Git
