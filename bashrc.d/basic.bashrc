@@ -21,7 +21,7 @@ alias cls='printf "\033c"'
 
 # 切換超級使用者權限時的偏好
 alias sudo='sudo '             # 空格的用途是告訴bash去檢查sudo後面接著的命令是否也是別名(alias)
-alias su='sudo -Es export "PATH=$PATH"'
+alias su='sudo -Es'
 
 
 # 載入其他設定檔
