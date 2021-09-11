@@ -29,7 +29,8 @@ if [ ! -d "$HOME/.vim_runtime" ]; then
 
     git clone --depth=1 https://github.com/amix/vimrc.git "$HOME/.vim_runtime"
     bash "$HOME/.vim_runtime/install_awesome_vimrc.sh"
-    sed -i '1s/^/set nu\nset mouse=a\n\n/' "$HOME/.vimrc"
+    touch "$HOME/.vim_runtime/my_configs.vim"
+    sed -i '1s/^/set nu\nset mouse=a\n\n/' "$HOME/.vim_runtime/my_configs.vim"
 
 fi
 VIM=$(sudo update-alternatives --list editor | grep vim.basic)
