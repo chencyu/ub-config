@@ -41,3 +41,9 @@ sudo update-alternatives --set editor $VIM
 git config --global user.email "chencyu.code@gmail.com"
 git config --global user.name "chencyu"
 
+
+# let grub menu wait indefinitely
+if ! grep GRUB_TIMEOUT=-1 "/etc/default/grub"; then
+    sudo sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=-1/g' /etc/default/grub
+    sudo update-grub
+fi
