@@ -56,3 +56,10 @@ if [ ! -d "$HOME/.themes" ]; then
     mkdir -p ~/.themes
 fi
 >&2 echo "Go 'https://github.com/vinceliuice/Orchis-theme/releases' to download Orchis-theme."
+
+
+# For Chrome
+if [ ! $(which google-chrome) ]; then
+    wget -C https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt install -y ./google-chrome-stable_current_amd64.deb && rm ./google-chrome-stable_current_amd64.deb
+fi
