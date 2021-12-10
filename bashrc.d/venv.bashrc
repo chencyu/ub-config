@@ -15,16 +15,19 @@ function errmsg()
 {
     case "$1:$2" in
 
-        "-syntax:pyver")
-            >&2 echo "You must provide num for python version"
-        ;;
-
         "-syntax:unknown")
             >&2 echo "Unknown option: $3"
+            return 1
         ;;
 
-        "-wrongitem:envname")
+        "-invalid:envname")
             >&2 echo "Unknown venv: $3"
+            return 2
+        ;;
+
+        "-syntax:pyver")
+            >&2 echo "You must provide num for python version"
+            return 3
         ;;
 
     esac
@@ -64,7 +67,7 @@ function venv()
 
         "-a"|"--activate")
             source "$PYVENVS/$2/bin/activate" 2> /dev/null || \
-            errmsg -wrongitem envname "$2"
+            errmsg -invalid envname "$2"
         ;;
 
         "-c"|"--create")
@@ -74,10 +77,9 @@ function venv()
             fi
             if [[ ! "$PYVER" =~ ^([2-3].[0-9]|[2-3])$ ]]; then
                 errmsg -syntax pyver
-                return 1
             fi
             if  [[ "$EnvName" =~ ^(\*|"")$ ]]; then
-                errmsg
+                errmsg -invalid envname "$2"
             fi
             python$PYVER -m venv --copies "$PYVENVS/$EnvName" || install_venv
         ;;
@@ -89,8 +91,13 @@ function venv()
         ;;
 
         "-r"|"--remove")
-            if [[ ! "$2" =~ ^(\*|"")$ ]]; then
-                rm -rf "$PYVENVS/$2"
+            if [[ "$2" =~ ^(\*|"")$ ]]; then
+                errmsg -invalid envname "$2"
+            fi
+            if [ ! -d "$PYVENVS/$EnvName" ]; then
+                errmsg -invalid envname "$EnvName"
+                rm -rf "$PYVENVS/$2" || errmsg -invalid envname "$2"
+                echo /dev/null
             fi
         ;;
 
@@ -100,7 +107,6 @@ function venv()
 
         *)
             errmsg -syntax unknown "$1"
-            return 1
         ;;
         
     esac
