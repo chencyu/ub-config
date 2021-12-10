@@ -102,7 +102,6 @@ function venv()
             if [ ! -d "$PYVENVS/$EnvName" ]; then
                 errmsg -invalid envname "$EnvName"
                 rm -rf "$PYVENVS/$EnvName" || errmsg -invalid envname "$EnvName"
-                echo /dev/null
             fi
         ;;
 
