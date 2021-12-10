@@ -20,12 +20,12 @@ function errmsg()
     case "$ERRTYPE:$ERRNAME" in
 
         "-syntax:unknown")
-            >&2 echo "Unknown option: $ERRNAME"
+            >&2 echo "Unknown option: $ERRITEM"
             return 1
         ;;
 
         "-invalid:envname")
-            >&2 echo "Unknown venv: $ERRNAME"
+            >&2 echo "Unknown venv: $ERRITEM"
             return 2
         ;;
 
