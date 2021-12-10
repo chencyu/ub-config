@@ -1,18 +1,14 @@
 HELP="
- _________________________________________________________
-| [Venv - Easy way to use Python venv]                    |
-|---------------------------------------------------------|
-|  venv  <operation>        <Py_ver>           <envName>  |
-|           create       -py <3.7/3.8 ...>       newEnv   |
-|           upgrade      -py <3.7/3.8 ...>        myEnv   |
-|           remove                                myEnv   |
-|            list                                         |
-|          activate                               myEnv   |
-|             -h                                          |
-|  ex.                                                    |
-|      venv create -py 3.7 newEnvName                     |
-|      venv remove myEnvName                              |
-|_________________________________________________________|
+venv: venv [-c [-py <version>]|-a|-l|-r] [envName] 
+  Manage python virtual environment with \`python -m venv'.
+
+  Options:
+    -c, --create        create a new virtual environment with specified name.
+    -py                 if the -c option is supplied, specify python version,
+                        default is \`3' (python3 provide by system PATH).
+    -a, --activate      activate a specific virtual environment.
+    -l, --list          list all exist virtual environment.
+    -r, --remove        remove a specific virtual environment.
 "
 
 function errmsg()
