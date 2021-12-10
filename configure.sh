@@ -41,3 +41,25 @@ sudo update-alternatives --set editor $VIM
 git config --global user.email "chencyu.code@gmail.com"
 git config --global user.name "chencyu"
 
+
+# let grub menu wait indefinitely
+if ! grep GRUB_TIMEOUT=-1 "/etc/default/grub"; then
+    sudo sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=-1/g' /etc/default/grub
+    sudo update-grub
+fi
+
+
+# For Gnome theme
+sudo apt install gnome-tweak-tool -y
+sudo apt install gnome-shell-extensions -y
+if [ ! -d "$HOME/.themes" ]; then
+    mkdir -p ~/.themes
+fi
+>&2 echo "Go 'https://github.com/vinceliuice/Orchis-theme/releases' to download Orchis-theme."
+
+
+# For Chrome
+if [ ! $(which google-chrome) ]; then
+    wget -C https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt install -y ./google-chrome-stable_current_amd64.deb && rm ./google-chrome-stable_current_amd64.deb
+fi
