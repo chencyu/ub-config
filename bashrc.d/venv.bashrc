@@ -61,7 +61,7 @@ function install_venv()
 function venv()
 {
     local PYVER=3
-    local PYVENVS="$HOME/.Envs"
+    local PYVENVS="$HOME/.venv"
     local EnvName="$2"
 
     case "$1" in
