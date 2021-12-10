@@ -13,15 +13,19 @@ venv: venv [-c [-py <version>]|-a|-l|-r] [envName]
 
 function errmsg()
 {
-    case "$1:$2" in
+    local ERRTYPE="$1"
+    local ERRNAME="$2"
+    local ERRITEM="$3"
+
+    case "$ERRTYPE:$ERRNAME" in
 
         "-syntax:unknown")
-            >&2 echo "Unknown option: $3"
+            >&2 echo "Unknown option: $ERRNAME"
             return 1
         ;;
 
         "-invalid:envname")
-            >&2 echo "Unknown venv: $3"
+            >&2 echo "Unknown venv: $ERRNAME"
             return 2
         ;;
 
@@ -61,13 +65,14 @@ function venv()
 {
     local PYVER=3
     local PYVENVS="$HOME/.venv"
+    local OPTION="$1"
     local EnvName="$2"
 
-    case "$1" in
+    case "$OPTION" in
 
         "-a"|"--activate")
-            source "$PYVENVS/$2/bin/activate" 2> /dev/null || \
-            errmsg -invalid envname "$2"
+            source "$PYVENVS/$EnvName/bin/activate" 2> /dev/null || \
+            errmsg -invalid envname "$EnvName"
         ;;
 
         "-c"|"--create")
@@ -79,7 +84,7 @@ function venv()
                 errmsg -syntax pyver
             fi
             if  [[ "$EnvName" =~ ^(\*|"")$ ]]; then
-                errmsg -invalid envname "$2"
+                errmsg -invalid envname "$EnvName"
             fi
             python$PYVER -m venv --copies "$PYVENVS/$EnvName" || install_venv
         ;;
@@ -91,12 +96,12 @@ function venv()
         ;;
 
         "-r"|"--remove")
-            if [[ "$2" =~ ^(\*|"")$ ]]; then
-                errmsg -invalid envname "$2"
+            if [[ "$EnvName" =~ ^(\*|"")$ ]]; then
+                errmsg -invalid envname "$EnvName"
             fi
             if [ ! -d "$PYVENVS/$EnvName" ]; then
                 errmsg -invalid envname "$EnvName"
-                rm -rf "$PYVENVS/$2" || errmsg -invalid envname "$2"
+                rm -rf "$PYVENVS/$EnvName" || errmsg -invalid envname "$EnvName"
                 echo /dev/null
             fi
         ;;
@@ -106,7 +111,7 @@ function venv()
         ;;
 
         *)
-            errmsg -syntax unknown "$1"
+            errmsg -syntax unknown "$OPTION"
         ;;
         
     esac
