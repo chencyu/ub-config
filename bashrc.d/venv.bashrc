@@ -86,7 +86,7 @@ function venv()
             if  [[ "$EnvName" =~ ^(\*|"")$ ]]; then
                 errmsg -invalid envname "$EnvName"
             fi
-            python$PYVER -m venv --copies "$PYVENVS/$EnvName" || install_venv
+            python$PYVER -m venv --copies "$PYVENVS/$EnvName" || install_venv && python$PYVER -m venv --copies "$PYVENVS/$EnvName"
         ;;
 
         "-l"|"--list")
