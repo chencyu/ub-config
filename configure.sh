@@ -50,12 +50,12 @@ fi
 
 
 # For Gnome theme
-sudo apt install gnome-tweak-tool -y
-sudo apt install gnome-shell-extensions -y
-if [ ! -d "$HOME/.themes" ]; then
-    mkdir -p ~/.themes
-fi
->&2 echo "Go 'https://github.com/vinceliuice/Orchis-theme/releases' to download Orchis-theme."
+# sudo apt install gnome-tweak-tool -y
+# sudo apt install gnome-shell-extensions -y
+# if [ ! -d "$HOME/.themes" ]; then
+#     mkdir -p ~/.themes
+# fi
+# >&2 echo "Go 'https://github.com/vinceliuice/Orchis-theme/releases' to download Orchis-theme."
 
 
 # For Chrome
